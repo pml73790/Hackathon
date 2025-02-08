@@ -130,6 +130,41 @@ function getBotResponse(input) {
     if(input.includes("herta")) {
         return "Time to twirl!";
     }
+    if(input.includes("help")){
+        getHelpMessage();
+        return `
+        Here are some things you can ask me:
+        - hello
+        - how are you
+        - financial fitness
+        - account balance
+        - urgent support
+        - investment advice
+        - credit score
+        - loan options
+        - savings account
+        - budgeting tips
+        - herta
+        - retirement planning
+        - tax advice
+        - fraud protection
+        - customer service
+        - open an account
+        - close an account
+        - transfer money
+        - robbing the bank
+        - lost card
+        - update information
+        - mobile app
+        - online banking
+        - mortgage options
+        - financial goals
+        - debt management
+        - insurance options
+        - credit card
+        - interest rates
+    <br>Operation: balance - deposit - withdraw`;
+    }
 
     return "I'm sorry, I didn't quite understand that. Could you please clarify your question or ask about something else?";
 }
