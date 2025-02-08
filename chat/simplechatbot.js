@@ -209,7 +209,7 @@ function performDeposit(input) {
         accountBalance += amount;
         return `You have successfully deposited $${amount}. Your new balance is $${accountBalance}.`;
     } else {
-        return "Please enter a valid deposit amount (greater than 0).";
+        return "Please enter a valid deposit amount (greater than 0). Ex: deposit 500";
     }
 }
 
@@ -223,7 +223,7 @@ function performWithdrawal(input) {
             return "Insufficient balance for this withdrawal.";
         }
     } else {
-        return "Please enter a valid withdrawal amount (greater than 0).";
+        return "Please enter a valid withdrawal amount (greater than 0). Ex: withdraw 100";
     }
 }
 
