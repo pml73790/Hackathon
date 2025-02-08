@@ -1,26 +1,22 @@
 UGAHacks Project Log Template
 Project Information
-Project Title:
-Team Members:
-Tier Level: [Beginner/Intermediate/Advanced]
+Project Title: Hackathon Project
+Team Members: Torsa Rahman, Tri Vo, Vi Tran, My Ly
+Tier Level: Intermediate
 Project Description: 
 
 
-
-
-
-
 Friday 
-Welcome to UGAHacks __ ! We’re excited that you’re participating and revving up for an amazing weekend! Today will be short, but we advise you to settle on a project and create a plan to guide you! Already have something in mind? Now’s a great time to get started!
+Welcome to UGAHacks __ ! Weâ€™re excited that youâ€™re participating and revving up for an amazing weekend! Today will be short, but we advise you to settle on a project and create a plan to guide you! Already have something in mind? Nowâ€™s a great time to get started!
+
 
 Goals:
-Goal 1
-Goal 2
-Goal 3
+Goal 1: Design a user-friendly website for financial tracking and budgeting
+Goal 2: 
+Goal 3: 
 
 Progress:
-(Describe what was accomplished)
-
+We have done decided what challenge to work on it + weâ€™ve come to agreement for a topic and a project to work on + we also decided the language/database/server to implement + designed the user-friendly interface for everyone 
 
 
 Challenges:
@@ -83,7 +79,7 @@ How it contributed to learning:
 
 
 Sunday
-Submissions are due at 8AM today!! Fit in your final touches for the project and make sure to check the submission checklist below to ensure you’re ready for judging!
+Submissions are due at 8AM today!! Fit in your final touches for the project and make sure to check the submission checklist below to ensure youâ€™re ready for judging!
 
 Goals:
 Goal 1
