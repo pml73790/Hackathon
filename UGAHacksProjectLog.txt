@@ -1,0 +1,126 @@
+UGAHacks Project Log Template
+Project Information
+Project Title:
+Team Members:
+Tier Level: [Beginner/Intermediate/Advanced]
+Project Description: 
+
+
+
+
+
+
+Friday 
+Welcome to UGAHacks __ ! We’re excited that you’re participating and revving up for an amazing weekend! Today will be short, but we advise you to settle on a project and create a plan to guide you! Already have something in mind? Now’s a great time to get started!
+
+Goals:
+Goal 1
+Goal 2
+Goal 3
+
+Progress:
+(Describe what was accomplished)
+
+
+
+Challenges:
+1. Challenge 1:
+   - Solution (if found):
+2. Challenge 2:
+   - Solution (if found):
+
+
+Learning:
+(List key concepts or skills learned)
+
+
+
+AI Usage (if any):
+
+Tool used:
+Purpose:
+How it contributed to learning:
+
+
+
+
+
+Saturday 
+Saturday is the longest day of the Hackathon! The bulk of your project will get done within today, so set your goals wisely!
+
+Goals:
+Goal 1
+Goal 2
+Goal 3
+
+Progress:
+(Describe was accomplished)
+
+
+
+Challenges:
+1. Challenge 1:
+   - Solution (if found):
+2. Challenge 2:
+   - Solution (if found):
+
+
+Learning:
+(List key concepts or skills learned)
+
+
+
+AI Usage (if any):
+
+Tool used:
+Purpose:
+How it contributed to learning:
+
+
+
+
+
+
+
+Sunday
+Submissions are due at 8AM today!! Fit in your final touches for the project and make sure to check the submission checklist below to ensure you’re ready for judging!
+
+Goals:
+Goal 1
+Goal 2
+Goal 3
+
+Progress:
+(Describe was accomplished)
+
+
+
+Challenges:
+1. Challenge 1:
+   - Solution (if found):
+2. Challenge 2:
+   - Solution (if found):
+
+
+Learning:
+(List key concepts or skills learned)
+
+
+
+AI Usage (if any):
+
+Tool used:
+Purpose:
+How it contributed to learning:
+
+
+
+
+
+Submission Checklist
+Make sure to submit on the UGAHacks __ Devpost at 8AM on Sunday!
+
+Project Github Repo 
+Readme file (summary of project log)
+Completed Project Log as PDF
+Live Project Site (optional)
