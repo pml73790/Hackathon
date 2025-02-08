@@ -20,15 +20,15 @@ We have done decided what challenge to work on it + we’ve come to agreement fo
 
 
 Challenges:
-1. Challenge 1:
-   - Solution (if found):
-2. Challenge 2:
-   - Solution (if found):
+1. Challenge 1: We spend too much time getting food and waste too much time.
+   - Solution (if found): We decide to get in line earlier next time. 
+2. Challenge 2: We don't have much experience with creating a chatbot.
+   - Solution (if found): We look up how to create a chatbot online and use AI to create a simple chatbot. 
 
 
 Learning:
 (List key concepts or skills learned)
-
+Creating a simple chatbot
 
 
 AI Usage (if any): chatGPT
@@ -36,7 +36,7 @@ AI Usage (if any): chatGPT
 Tool used: mongoDB, VS code, Github, W3School
 Purpose:
 How it contributed to learning:
-
+The tools are our workspace and provided with information on how to do our project. 
 
 
 
