@@ -9,8 +9,7 @@ function sendMessage() {
     // Clear the chat if user types 'clear'
     if (userText.toLowerCase() === "clear") {
         chatbox.innerHTML = `<p><strong>Herta:</strong> Welcome! I am the Herta Bot, and I am designed to give you more information based on the topics you enter.
-        <br>Type 'help info' to see what you can ask me for information.
-        <br>Type 'help operation' to learn about the operations you can perform with your account.</p>`;
+        <br>Type 'help' to see what you can ask me.</p>`;
         document.getElementById("userInput").value = ""; // Clear the input field
         return; // Exit the function to prevent sending the "clear" command as a message
     }
@@ -242,6 +241,5 @@ function extractAmount(input) {
 window.onload = function() {
     let chatbox = document.getElementById("chatbox");
     chatbox.innerHTML += `<p><strong>Herta:</strong> Welcome! I am the Herta Bot, and I am designed to give you more information based on the topics you enter.
-     <br>Type 'help info' to see what you can ask me for information.
-     <br>Type 'help operation' to learn about the operations you can perform with your account.</p>`;
+     <br>Type 'help' to see what you can ask me.</p>`;
 };

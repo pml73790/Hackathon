@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herta Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #chatbox {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        #userInput {
+            width: 80%;
+            padding: 10px;
+        }
+        #sendButton {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chatbox">
+        <p><strong>Herta:</strong> Welcome! I am the Herta Bot, and I am designed to give you more information based on the topics you enter.
+        <br>Type 'help info' to see what you can ask me for information.
+        <br>Type 'help operation' to learn about the operations you can perform with your account.</p>
+    </div>
+
+    <input type="text" id="userInput" placeholder="Enter your message here" />
+
+    <script>
+        document.getElementById("userInput").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+
+        async function sendMessage() {
+            let userText = document.getElementById("userInput").value;
+            let chatbox = document.getElementById("chatbox");
+
+            if (userText.trim() === "") return;
+
+            if (userText.toLowerCase() === "clear") {
+                chatbox.innerHTML = `<p><strong>Herta:</strong> Welcome! I am the Herta Bot, and I am designed to give you more information based on the topics you enter.
+                <br>Type 'help info' to see what you can ask me for information.
+                <br>Type 'help operation' to learn about the operations you can perform with your account.</p>`;
+                document.getElementById("userInput").value = "";
+                return;
+            }
+
+            let botResponse = await getBotResponse(userText);
+            chatbox.innerHTML += `<p><strong>You:</strong> ${userText}</p>`;
+            chatbox.innerHTML += `<p><strong>Herta:</strong> ${botResponse}</p>`;
+
+            document.getElementById("userInput").value = "";
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        async function getBotResponse(input) {
+            const apiKey = "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"; // Replace with your OpenAI API key
+            const apiUrl = "https://api.openai.com/v1/completions"; // Use the correct endpoint
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-3.5-turbo", // Or use "gpt-4" if needed
+                        prompt: input,
+                        max_tokens: 150,
+                        temperature: 0.7
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.choices[0].text.trim();
+            } catch (error) {
+                console.error("Error:", error);
+                return "I'm sorry, I couldn't process your request. Please try again later.";
+            }
+        }
+    </script>
+</body>
+</html>
