@@ -31,9 +31,9 @@ Learning:
 
 
 
-AI Usage (if any):
+AI Usage (if any): chatGPT
 
-Tool used:
+Tool used: mongoDB, VS code, Github, W3School
 Purpose:
 How it contributed to learning:
 
