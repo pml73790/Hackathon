@@ -7,7 +7,7 @@ export default function Dashboard() {
   const [showHomePage, setShowHomePage] = useState(false);
 
   const dashboardStyle = {
-    backgroundImage: "url('/DecorImage/mountains.webp')", 
+   // backgroundImage: "url('/DecorImage/mountains.webp')", 
     backgroundSize: "cover",
     backgroundPosition: "center",
     minHeight: "100vh", 

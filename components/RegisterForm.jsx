@@ -64,7 +64,7 @@ export default function RegisterForm() {
     <div
       className="grid place-items-center h-screen"
       style={{
-        backgroundImage: "url('/DecorImage/mountains.webp')", // Replace with your image path
+       // backgroundImage: "url('/DecorImage/mountains.webp')", // Replace with your image path
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

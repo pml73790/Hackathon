@@ -1,185 +1,53 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link"; // Import Next.js's Link
-import sampleFlashcards from "./SampleFlashcard"; // Assuming this is in the same directory
+import React from "react";
+import Link from "next/link";
 
-function HomePage() {
-  const [randomFlashcards, setRandomFlashcards] = useState([]);
-  const [customFlashcards, setCustomFlashcards] = useState([]);
-  const [showInputFields, setShowInputFields] = useState(false);
-  const [frontText, setFrontText] = useState("");
-  const [backText, setBackText] = useState("");
-
-  const handleGenerateFlashcards = () => {
-    const shuffledFlashcards = [...sampleFlashcards].sort(
-      () => 0.5 - Math.random()
-    );
-    setRandomFlashcards(shuffledFlashcards.slice(0, 3));
-  };
-
-  const handleAddFlashcard = () => {
-    setShowInputFields(true);
-  };
-
-  const handleSubmitFlashcard = (event) => {
-    event.preventDefault();
-    if (frontText && backText) {
-      const newFlashcard = {
-        id: customFlashcards.length + randomFlashcards.length + 1,
-        frontText,
-        backText,
-      };
-      setCustomFlashcards([...customFlashcards, newFlashcard]);
-      setFrontText("");
-      setBackText("");
-      setShowInputFields(false);
-      console.log("New flashcard created:", newFlashcard);
-    }
-  };
-
+const HomePage = () => {
   return (
     <div style={styles.background}>
       <div style={styles.container}>
         <header style={styles.header}>
-          <h1 style={styles.mainTitle}>OneFlash</h1>
-         <h2 style={styles.subtitle}>Financial Freedom Awaits.</h2>
-         <nav>
-           <Link href="/login">
-             <button style={styles.button}>Login</button>
-           </Link>
-           <Link href="/register">
-             <button style={styles.button}>Register</button>
-           </Link>
-         </nav>
+          <h1 style={styles.mainTitle}>FinChat</h1>
+          <h2 style={styles.subtitle}>Your Gateway to Financial Freedom</h2>
+          <nav>
+            <Link href="/login">
+              <button style={styles.button}>Login</button>
+            </Link>
+            <Link href="/register">
+              <button style={styles.button}>Register</button>
+            </Link>
+          </nav>
         </header>
 
-
-        <h3>Welcome to the Flashcard App</h3>
-
-        <button onClick={handleGenerateFlashcards} style={styles.button}>
-          Generate Random Flashcards
-        </button>
-
-        <div style={{ display: "flex", flexWrap: "wrap", marginTop: "1rem" }}>
-          {randomFlashcards.map((flashcard) => (
-            <Flashcard key={flashcard.id} flashcard={flashcard} />
-          ))}
-        </div>
-
-        <h3>Create Your Own Flashcards</h3>
-
-        {showInputFields && (
-          <form onSubmit={handleSubmitFlashcard} style={{ marginBottom: "1rem" }}>
-            <input
-              type="text"
-              placeholder="Front Text"
-              value={frontText}
-              onChange={(e) => setFrontText(e.target.value)}
-              style={{ marginRight: "0.5rem" }}
-            />
-            <input
-              type="text"
-              placeholder="Back Text"
-              value={backText}
-              onChange={(e) => setBackText(e.target.value)}
-              style={{ marginRight: "0.5rem" }}
-            />
-            <button type="submit" style={styles.button}>
-              Submit
-            </button>
-          </form>
-        )}
-
-        <button onClick={handleAddFlashcard} style={styles.button}>
-          Add New Flashcard
-        </button>
-
-        <div style={{ display: "flex", flexWrap: "wrap", marginTop: "1rem" }}>
-          {customFlashcards.map((flashcard) => (
-            <Flashcard key={flashcard.id} flashcard={flashcard} />
-          ))}
-        </div>
+        <main style={styles.content}>
+          <h3 style={styles.welcomeTitle}>Manage Your Finances With Ease</h3>
+          <p style={styles.description}>
+            Track your expenses, set budgets, and gain financial insights to make smarter decisions.
+          </p>
+          <div style={styles.featuresContainer}>
+            <div style={styles.featureBox}>
+              <h4>💰 Expense Tracking</h4>
+              <p>Monitor your spending and stay on top of your finances.</p>
+            </div>
+            <div style={styles.featureBox}>
+              <h4>📊 Budget Management</h4>
+              <p>Set monthly budgets and achieve your financial goals.</p>
+            </div>
+            <div style={styles.featureBox}>
+              <h4>📈 Investment Insights</h4>
+              <p>Analyze your investments and optimize your portfolio.</p>
+            </div>
+          </div>
+        </main>
       </div>
     </div>
   );
-}
-
-function Flashcard({ flashcard }) {
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped);
-  };
-
-  return (
-    <div
-      onClick={handleFlip}
-      style={{
-        perspective: "1000px",
-        width: "300px",
-        height: "400px",
-        margin: "1rem",
-        cursor: "pointer",
-      }}
-    >
-      <div
-        style={{
-          transformStyle: "preserve-3d",
-          transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-          transition: "transform 0.6s",
-          position: "relative",
-          width: "100%",
-          height: "100%",
-          border: "1px solid #ddd",
-          padding: "1rem",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-          textAlign: "center",
-          backgroundColor: "#fff",
-        }}
-      >
-        <div
-          style={{
-            backfaceVisibility: "hidden",
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            display: isFlipped ? "none" : "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-          }}
-        >
-          <p style={{ fontSize: "1.2rem" }}>
-            <strong>Front:</strong> {flashcard.frontText}
-          </p>
-        </div>
-
-        <div
-          style={{
-            backfaceVisibility: "hidden",
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            display: isFlipped ? "flex" : "none",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            transform: "rotateY(180deg)",
-          }}
-        >
-          <p style={{ fontSize: "1.2rem" }}>
-            <strong>Back:</strong> {flashcard.backText}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
+};
 
 const styles = {
   background: {
-    backgroundImage: "url(/DecorImage/mountain.webp)", // Correct relative path
+    backgroundImage: "url(/DecorImage/finance-bg.webp)", // Use a finance-related background
     backgroundSize: "cover",
     backgroundPosition: "center",
     minHeight: "100vh",
@@ -188,34 +56,33 @@ const styles = {
     justifyContent: "center",
   },
   container: {
-    backgroundColor: "rgba(255, 255, 255, 0.8)", // Semi-transparent white
+    backgroundColor: "rgba(255, 255, 255, 0.9)", // Semi-transparent white
     padding: "2rem",
     borderRadius: "8px",
     width: "80%",
     maxWidth: "1000px",
+    textAlign: "center",
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
   },
   header: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
     borderBottom: "1px solid #ddd",
     paddingBottom: "1rem",
     marginBottom: "1rem",
   },
   mainTitle: {
-    fontSize: "3rem", // Increased font size
-    fontFamily: "'Pacifico', cursive", // Interesting font (Google Fonts)
-    color: "red",
-    marginBottom: "0.5rem",
+    fontSize: "3rem",
+    fontFamily: "'Montserrat', sans-serif",
+    color: "#2c3e50",
+    fontWeight: "bold",
   },
   subtitle: {
-    fontSize: "1.5rem", // Slightly larger subtitle
-    fontFamily: "'Roboto', sans-serif", // Complimentary font
-    color: "black",
+    fontSize: "1.5rem",
+    fontFamily: "'Roboto', sans-serif",
+    color: "#34495e",
+    marginBottom: "1rem",
   },
   button: {
-    backgroundColor: "red",
+    backgroundColor: "#3498db",
     color: "white",
     fontSize: "1.2rem",
     padding: "0.75rem 1.5rem",
@@ -223,6 +90,34 @@ const styles = {
     border: "none",
     borderRadius: "8px",
     cursor: "pointer",
+    transition: "background 0.3s",
+  },
+  content: {
+    marginTop: "2rem",
+  },
+  welcomeTitle: {
+    fontSize: "2rem",
+    color: "#2c3e50",
+    marginBottom: "1rem",
+  },
+  description: {
+    fontSize: "1.2rem",
+    color: "#555",
+    marginBottom: "2rem",
+  },
+  featuresContainer: {
+    display: "flex",
+    justifyContent: "space-around",
+    flexWrap: "wrap",
+    gap: "1rem",
+  },
+  featureBox: {
+    width: "30%",
+    padding: "1rem",
+    backgroundColor: "#ecf0f1",
+    borderRadius: "8px",
+    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+    textAlign: "center",
   },
 };
 

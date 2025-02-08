@@ -1,5 +1,5 @@
 import LoginForm from "@/components/LoginForm";
-import HomePage from "@/components/home/Homepage";
+import HomePage from "@/components/home/HomePage";
 
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";

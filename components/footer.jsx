@@ -16,11 +16,11 @@ const Footer = () => {
       }}
     >
       <div>
-        <p>© 2024 One-Flash. All rights reserved.</p>
+        <p>© 2024 FinChat. All rights reserved.</p>
         <p>
-          Check out our project on{' '}
+          Check out our project on{'https://github.com/pml73790/Hackathon'}
           <Link
-            href="https://github.com/vitran75/cs4300_final_project/tree/main"
+            href=""
             target="_blank"
             rel="noopener noreferrer"
             style={{

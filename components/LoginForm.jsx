@@ -37,7 +37,7 @@ export default function LoginForm() {
     <div
       className="grid place-items-center h-screen"
       style={{
-        backgroundImage: "url('/DecorImage/mountains.webp')", 
+       // backgroundImage: "url('/DecorImage/mountains.webp')", 
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
