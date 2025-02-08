@@ -3,95 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Herta Chatbot</title>
+    <title>Chatbot</title>
     <style>
         body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
             font-family: Arial, sans-serif;
+            background: url('money.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        #chat-container {
+            width: 1000px;
+            max-width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         #chatbox {
-            border: 1px solid #ccc;
+            width: 90%;
+            height: 600px;
             padding: 10px;
-            height: 300px;
-            overflow-y: auto;
-            margin-bottom: 20px;
+            overflow-y: scroll;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
         }
         #userInput {
-            width: 80%;
-            padding: 10px;
+            width: 90%;
+            padding: 30px;
+            border: none;
+            border-top: 1px solid #ccc;
+            box-sizing: border-box;
+            margin-bottom: 60px;
         }
-        #sendButton {
-            padding: 10px;
+        #banking-image {
+            width: 90%;
+            height: auto;
+            margin-bottom: 60px;
         }
     </style>
 </head>
 <body>
-    <div id="chatbox">
-        <p><strong>Herta:</strong> Welcome! I am the Herta Bot, and I am designed to give you more information based on the topics you enter.
-        <br>Type 'help info' to see what you can ask me for information.
-        <br>Type 'help operation' to learn about the operations you can perform with your account.</p>
+    <div id="chat-container">
+        <div id="chatbox"></div>
+        <input type="text" id="userInput" placeholder="Type a message..." onkeydown="if(event.key === 'Enter') sendMessage()">
     </div>
-
-    <input type="text" id="userInput" placeholder="Enter your message here" />
-
-    <script>
-        document.getElementById("userInput").addEventListener("keydown", function(event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
-        });
-
-        async function sendMessage() {
-            let userText = document.getElementById("userInput").value;
-            let chatbox = document.getElementById("chatbox");
-
-            if (userText.trim() === "") return;
-
-            if (userText.toLowerCase() === "clear") {
-                chatbox.innerHTML = `<p><strong>Herta:</strong> Welcome! I am the Herta Bot, and I am designed to give you more information based on the topics you enter.
-                <br>Type 'help info' to see what you can ask me for information.
-                <br>Type 'help operation' to learn about the operations you can perform with your account.</p>`;
-                document.getElementById("userInput").value = "";
-                return;
-            }
-
-            let botResponse = await getBotResponse(userText);
-            chatbox.innerHTML += `<p><strong>You:</strong> ${userText}</p>`;
-            chatbox.innerHTML += `<p><strong>Herta:</strong> ${botResponse}</p>`;
-
-            document.getElementById("userInput").value = "";
-            chatbox.scrollTop = chatbox.scrollHeight;
-        }
-
-        async function getBotResponse(input) {
-            const apiKey = "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"; // Replace with your OpenAI API key
-            const apiUrl = "https://api.openai.com/v1/completions"; // Use the correct endpoint
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${apiKey}`
-                    },
-                    body: JSON.stringify({
-                        model: "gpt-3.5-turbo", // Or use "gpt-4" if needed
-                        prompt: input,
-                        max_tokens: 150,
-                        temperature: 0.7
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                return data.choices[0].text.trim();
-            } catch (error) {
-                console.error("Error:", error);
-                return "I'm sorry, I couldn't process your request. Please try again later.";
-            }
-        }
-    </script>
+    <script src="openAIchatbot.js"></script>
 </body>
 </html>
