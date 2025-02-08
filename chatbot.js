@@ -8,7 +8,7 @@ function sendMessage() {
 
     // Clear the chat if user types 'clear'
     if (userText.toLowerCase() === "clear") {
-        chatbox.innerHTML = `<p><strong>Bot:</strong> Welcome! This chat is designed to give you more information based on the topics you enter.
+        chatbox.innerHTML = `<p><strong>Herta:</strong> Welcome! I am the Herta Bot, and I am designed to give you more information based on the topics you enter.
         <br>Type 'help info' to see what you can ask me for information.
         <br>Type 'help operation' to learn about the operations you can perform with your account.</p>`;
         document.getElementById("userInput").value = ""; // Clear the input field
@@ -127,6 +127,9 @@ function getBotResponse(input) {
     if (input.includes("help operation")) {
         return "balance - deposit - withdraw";
     }
+    if(input.includes("herta")) {
+        return "Time to twirl!";
+    }
 
     return "I'm sorry, I didn't quite understand that. Could you please clarify your question or ask about something else?";
 }
@@ -144,6 +147,7 @@ function getHelpMessage() {
         - loan options
         - savings account
         - budgeting tips
+        - herta
         - retirement planning
         - tax advice
         - fraud protection
@@ -202,7 +206,7 @@ function extractAmount(input) {
 // Display the welcome message with options when the page loads
 window.onload = function() {
     let chatbox = document.getElementById("chatbox");
-    chatbox.innerHTML += `<p><strong>Bot:</strong> Welcome! This chat is designed to give you more information based on the topics you enter.
+    chatbox.innerHTML += `<p><strong>Herta:</strong> Welcome! I am the Herta Bot, and I am designed to give you more information based on the topics you enter.
      <br>Type 'help info' to see what you can ask me for information.
      <br>Type 'help operation' to learn about the operations you can perform with your account.</p>`;
 };
