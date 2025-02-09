@@ -1,4 +1,4 @@
-Team members: Vi Tran, Tri Vo, Torsa Rahman, My Ly.
+Team members: Vi Tran, Tri Vo, Torsa Rahman, My Ly
 Purpose of the project: The purpose of our project is to make a user-friendly web service for
 users to be able to track their money goals and be able to budget efficiently. We are also using
 chatbots to help users be able to ask questions and get advice regarding their finances.
@@ -14,6 +14,6 @@ getting help from AI and then look some stuff on the internet to learn more abou
 Cred to any public frameworks: None
 How to run our project: The project under branch vi-hack is our final project. To run it upload the
 folder onto vs code. Type “npm install” into the terminal. Then type “npm run dev”. This will give
-a local host link that you can push to get to out project. If something wrong then use the zip file 
-that we submitted on devpost instead. 
+a local host link that you can push to get to out project. The env file is in the zip file submitted 
+to devpost. 
 Youtube link: https://youtu.be/rlFANbcPLg0?si=w0c-QvbFGzC7G_xw
