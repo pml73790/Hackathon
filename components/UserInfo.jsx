@@ -112,8 +112,14 @@ export default function UserInfo() {
       {/* Chatbot Component (Visible when toggled) */}
       {showChatbot && (
         <div
-          className="fixed bottom-16 right-5 w-80 h-96 bg-white shadow-xl rounded-lg overflow-hidden z-50"
+          className="fixed bottom-5 right-5 w-[350px] h-[550px] bg-white shadow-xl rounded-lg overflow-auto z-50"
         >
+          <button
+            onClick={() => setShowChatbot(false)}
+            className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600"
+          >
+            <FaTimes />
+          </button>
           <Chatbot />
         </div>
       )}

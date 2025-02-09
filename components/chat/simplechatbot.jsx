@@ -1,27 +1,108 @@
 import React, { useState } from "react";
-import "./chatbox.css"
 
 const Chatbot = () => {
-  const [accountBalance, setAccountBalance] = useState(1000); // Initial balance
-  const [messages, setMessages] = useState([
+  const [accountBalance, setAccountBalance] = useState(0); // Store the current account balance
+  const [messages, setMessages] = useState([ // Store chat messages
     {
       sender: "Herta",
       text: "Welcome! I am the Herta Bot, and I am designed to give you more information based on the topics you enter. Type 'help' to see what you can ask me.",
     },
   ]);
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState(""); // Track the user's input
+  const [showChat, setShowChat] = useState(true); // Control the visibility of the chat
 
-  // Function to handle sending a message
+  // Styling for the chat container
+  const chatContainerStyle = {
+    maxWidth: "550px",
+    margin: "0 auto",
+    padding: "10px",
+    border: "1px solid #ccc",
+    borderRadius: "10px",
+    backgroundColor: "#f9f9f9",
+    display: "flex",
+    flexDirection: "column",
+    height: "auto",
+  };
+
+  // Styling for the chatbox where messages are displayed
+  const chatboxStyle = {
+    flexGrow: 1,
+    overflowY: "auto",
+    border: "1px solid #ddd",
+    borderRadius: "5px",
+    padding: "10px",
+    marginBottom: "15px",
+    backgroundColor: "#fff",
+    fontSize: "14px",
+    height: "350px",
+  };
+
+  // Styling for each message
+  const messageStyle = {
+    marginBottom: "10px",
+  };
+
+  // Styling for user messages
+  const messageYouStyle = {
+    textAlign: "left",
+  };
+
+  // Styling for bot messages
+  const messageHertaStyle = {
+    textAlign: "left",
+  };
+
+  // Styling for the input container
+  const inputContainerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: "10px",
+    paddingTop: "10px",
+    backgroundColor: "#f0f0f0",
+  };
+
+  // Styling for the input field
+  const inputStyle = {
+    width: "80%",
+    padding: "10px",
+    border: "2px solid #ddd",
+    borderRadius: "10px",
+    marginBottom: "10px",
+    fontSize: "14px",
+    height: "40px",
+    backgroundColor: "#fff",
+    color: "#333",
+    outline: "none",
+  };
+
+  // Styling for the send button
+  const buttonStyle = {
+    padding: "10px 30px",
+    fontSize: "16px",
+    border: "none",
+    borderRadius: "10px",
+    backgroundColor: "#007bff",
+    color: "#fff",
+    cursor: "pointer",
+  };
+
+  // Button hover styling
+  const buttonHoverStyle = {
+    backgroundColor: "#0056b3",
+  };
+
+  // Function to send a message
   const sendMessage = () => {
     if (userInput.trim() === "") return; // Prevent sending empty messages
 
-    // Add user's message to the chat
+    // Add user message to the chat
     setMessages((prevMessages) => [
       ...prevMessages,
       { sender: "You", text: userInput },
     ]);
 
-    // Get bot's response
+    // Generate bot's response based on user input
     const botResponse = getBotResponse(userInput);
     setMessages((prevMessages) => [
       ...prevMessages,
@@ -32,18 +113,17 @@ const Chatbot = () => {
     setUserInput("");
   };
 
-  // Function to handle key press (e.g., Enter key)
+  // Handle Enter key press to send message
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       sendMessage();
     }
   };
 
-  // Function to generate bot responses
+  // Generate bot response based on user input
   const getBotResponse = (input) => {
     input = input.toLowerCase();
 
-    // Bank operation handling
     if (input.includes("balance")) {
       return `Your current account balance is $${accountBalance}.`;
     }
@@ -53,13 +133,11 @@ const Chatbot = () => {
     if (input.includes("withdraw")) {
       return performWithdrawal(input);
     }
-
-    // General responses
     if (input.includes("hello")) {
-      return "Hello! How can I assist you today? If you're looking for financial information or advice, feel free to ask me anything!";
+      return "Hello! How can I assist you today?";
     }
     if (input.includes("how are you")) {
-      return "I'm just a chatbot, so I don't have feelings, but I'm always here and ready to help with any financial questions or concerns you may have!";
+      return "I'm just a chatbot, but I'm here to help!";
     }
     if (input.includes("help")) {
       return getHelpMessage();
@@ -68,109 +146,117 @@ const Chatbot = () => {
       return "Time to twirl!";
     }
 
-    // Default response
-    return "I'm sorry, I didn't quite understand that. Could you please clarify your question or ask about something else?";
+    return "I'm sorry, I didn't quite understand that.";
   };
 
-  // Function to handle deposits
+  // Handle deposits by extracting amount from input
   const performDeposit = (input) => {
     const amount = extractAmount(input);
     if (amount > 0) {
       setAccountBalance((prevBalance) => prevBalance + amount);
-      return `You have successfully deposited $${amount}. Your new balance is $${accountBalance + amount}.`;
+      return `You have successfully deposited $${amount}. Your new balance will be updated soon.`;
     } else {
-      return "Please enter a valid deposit amount (greater than 0). Ex: deposit 500";
+      return "Please enter a valid deposit amount. Example: deposit 500";
     }
   };
 
-  // Function to handle withdrawals
+  // Handle withdrawals by extracting amount from input
   const performWithdrawal = (input) => {
     const amount = extractAmount(input);
     if (amount > 0) {
       if (accountBalance >= amount) {
         setAccountBalance((prevBalance) => prevBalance - amount);
-        return `You have successfully withdrawn $${amount}. Your new balance is $${accountBalance - amount}.`;
+        return `You have successfully withdrawn $${amount}. Your new balance will be updated soon.`;
       } else {
         return "Insufficient balance for this withdrawal.";
       }
     } else {
-      return "Please enter a valid withdrawal amount (greater than 0). Ex: withdraw 100";
+      return "Please enter a valid withdrawal amount. Example: withdraw 100";
     }
   };
 
-  // Function to extract numeric amounts from the user's input
+  // Extract numeric values from the input string
   const extractAmount = (input) => {
-    const regex = /\d+(\.\d{1,2})?/; // Regular expression to find numbers
+    const regex = /\d+(\.\d{1,2})?/;
     const match = input.match(regex);
-    if (match) {
-      return parseFloat(match[0]);
-    }
-    return 0;
+    return match ? parseFloat(match[0]) : 0;
   };
 
-  // Function to generate the help message
+  // Return the help message with available commands
   const getHelpMessage = () => {
-    return (
-      <div>
-        <p>Here are some things you can ask me:</p>
-        <ul>
-          <li>hello</li>
-          <li>how are you</li>
-          <li>financial fitness</li>
-          <li>account balance</li>
-          <li>urgent support</li>
-          <li>investment advice</li>
-          <li>credit score</li>
-          <li>loan options</li>
-          <li>savings account</li>
-          <li>budgeting tips</li>
-          <li>herta</li>
-          <li>retirement planning</li>
-          <li>tax advice</li>
-          <li>fraud protection</li>
-          <li>customer service</li>
-          <li>open an account</li>
-          <li>close an account</li>
-          <li>transfer money</li>
-          <li>robbing the bank</li>
-          <li>lost card</li>
-          <li>update information</li>
-          <li>mobile app</li>
-          <li>online banking</li>
-          <li>mortgage options</li>
-          <li>financial goals</li>
-          <li>debt management</li>
-          <li>insurance options</li>
-          <li>credit card</li>
-          <li>interest rates</li>
-        </ul>
-        <p>Operation: balance - deposit - withdraw</p>
-      </div>
-    );
+    return `Here are some things you can ask me:
+    - hello
+    - how are you
+    - financial fitness
+    - account balance
+    - urgent support
+    - investment advice
+    - credit score
+    - loan options
+    - savings account
+    - budgeting tips
+    - retirement planning
+    - tax advice
+    - fraud protection
+    - customer service
+    - open an account
+    - close an account
+    - transfer money
+    - lost card
+    - update information
+    - online banking
+    - mortgage options
+    - debt management
+    - credit card
+    - interest rates
+
+    Operations: balance - deposit - withdraw
+    `;
+  };
+
+  // Function to close the chat
+  const closeChat = () => {
+    setShowChat(false); // Hide the chat
   };
 
   return (
-    <div className="chat-container">
-      <h1>Herta Chatbot</h1>
-      <div className="chatbox">
-        {messages.map((message, index) => (
-          <div key={index} className={`message ${message.sender.toLowerCase()}`}>
-            <strong>{message.sender}:</strong> {message.text}
-          </div>
-        ))}
+    showChat && (
+      <div style={chatContainerStyle}>
+        <h1>Herta Chatbot</h1>
+        <div style={chatboxStyle}>
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              style={{
+                ...messageStyle,
+                ...(message.sender === "You" ? messageYouStyle : messageHertaStyle),
+              }}
+            >
+              <strong>{message.sender}:</strong> {message.text}
+            </div>
+          ))}
+        </div>
+        <div style={inputContainerStyle}>
+          <input
+            type="text"
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            onKeyUp={handleKeyPress}
+            placeholder="Type your message here..."
+            style={inputStyle}
+          />
+          <button
+            onClick={sendMessage}
+            style={buttonStyle}
+            onMouseOver={(e) => (e.target.style.backgroundColor = buttonHoverStyle.backgroundColor)}
+            onMouseOut={(e) => (e.target.style.backgroundColor = buttonStyle.backgroundColor)}
+          >
+            Send
+          </button>
+        </div>
       </div>
-      <div className="input-container">
-        <input
-          type="text"
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder="Type your message here..."
-        />
-        <button onClick={sendMessage}>Send</button>
-      </div>
-    </div>
+    )
   );
 };
 
-export default Chatbot; 
+export default Chatbot;
