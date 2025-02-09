@@ -13,7 +13,7 @@ Another problem is figuring out how to implement a database into our website. We
 getting help from AI and then look some stuff on the internet to learn more about the databases.
 Cred to any public frameworks: None
 How to run our project: The project under branch vi-hack is our final project. To run it upload the
-folder onto vs code. Type “npm install” into the terminal. Then type “npm run dev”. This will give
-a local host link that you can push to get to out project. The env file is in the zip file submitted 
-to devpost. 
+folder onto vs code and get the env file from the zip file submitted 
+to devpost. Type “npm install” into the terminal. Then type “npm run dev”. This will give
+a local host link that you can push to get to out project. 
 Youtube link: https://youtu.be/rlFANbcPLg0?si=w0c-QvbFGzC7G_xw
