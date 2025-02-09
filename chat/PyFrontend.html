@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with ChatGPT</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .chat-box { width: 100%; max-width: 600px; margin: 0 auto; }
+        .chat-log { border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: scroll; }
+        .chat-input { width: 100%; padding: 10px; }
+        .button { padding: 10px; margin-top: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="chat-box">
+        <h2>Chat with ChatGPT</h2>
+        <div class="chat-log" id="chat-log"></div>
+        <input type="text" id="user-input" class="chat-input" placeholder="Type your message...">
+        <button class="button" id="send-btn">Send</button>
+    </div>
+
+    <script>
+        document.getElementById('send-btn').addEventListener('click', async function() {
+            const userInput = document.getElementById('user-input').value;
+            if (userInput.trim() === "") return;
+
+            // Add user input to the chat log
+            document.getElementById('chat-log').innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+            document.getElementById('user-input').value = '';
+
+            // Send the input to the Flask backend
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_input: userInput }),
+            });
+
+            const data = await response.json();
+
+            if (data.response) {
+                document.getElementById('chat-log').innerHTML += `<p><strong>ChatGPT:</strong> ${data.response}</p>`;
+            } else {
+                document.getElementById('chat-log').innerHTML += `<p><strong>Error:</strong> ${data.error}</p>`;
+            }
+
+            // Scroll to the bottom of the chat log
+            document.getElementById('chat-log').scrollTop = document.getElementById('chat-log').scrollHeight;
+        });
+    </script>
+
+</body>
+</html>
