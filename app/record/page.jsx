@@ -4,7 +4,7 @@ import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 import { NextResponse } from "next/server";
 
-// Handle POST request to add financial transaction
+
 export async function POST(req) {
     try {
         // Authenticate user session
@@ -13,7 +13,7 @@ export async function POST(req) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        const email = session.user.email; // Get user email
+        const email = session.user.email; 
         await connectMongoDB(); // Connect to MongoDB
 
         // Find the user
@@ -22,7 +22,7 @@ export async function POST(req) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
 
-        // Parse incoming transaction data
+        
         const body = await req.json();
         const { description, amount, date } = body;
 
@@ -30,16 +30,16 @@ export async function POST(req) {
             return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
         }
 
-        // Create a new transaction object
+        
         const newTransaction = {
             description,
             amount,
             date: date || new Date(),
         };
 
-        // Add transaction to user's document
+        
         user.transactions.push(newTransaction);
-        await user.save(); // Save updated user document
+        await user.save(); 
 
         return NextResponse.json(
             { message: "Transaction added successfully", transaction: newTransaction },
@@ -70,7 +70,7 @@ export async function GET() {
 
         const transactions = user.transactions || [];
 
-        // Generate summary dynamically
+        
         const totalIncome = transactions
             .filter((t) => t.amount > 0)
             .reduce((sum, t) => sum + t.amount, 0);

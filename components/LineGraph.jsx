@@ -10,7 +10,7 @@ const LineChart = () => {
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch transactions from MongoDB
+ 
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
@@ -36,14 +36,14 @@ const LineChart = () => {
     );
   }
 
-  // Aggregate transactions by date
+  
   const groupedTransactions = transactions.reduce((acc, { date, amount }) => {
     const formattedDate = new Date(date).toLocaleDateString();
     acc[formattedDate] = (acc[formattedDate] || 0) + amount;
     return acc;
   }, {});
 
-  // Convert grouped data into sorted arrays
+  
   const dates = Object.keys(groupedTransactions).sort((a, b) => new Date(a) - new Date(b));
   const amounts = dates.map((date) => groupedTransactions[date]);
 

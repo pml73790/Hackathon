@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Navbar = ({ isAuthorized }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isNightMode, setIsNightMode] = useState(false); // State for night mode
+  const [isNightMode, setIsNightMode] = useState(false); 
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -13,13 +13,12 @@ const Navbar = ({ isAuthorized }) => {
 
   const toggleNightMode = () => {
     setIsNightMode(!isNightMode);
-    document.documentElement.classList.toggle("dark"); // Toggle dark mode class on the root element
+    document.documentElement.classList.toggle("dark"); 
   };
 
   return (
     <header className={`${isNightMode ? "bg-gray-900" : "bg-blue-800"} text-white px-6 py-4 shadow-md`}>
       <nav className="max-w-6xl mx-auto flex justify-between items-center">
-        {/* Left Side */}
         <div className="flex items-center gap-4">
           <button onClick={toggleMenu} className="focus:outline-none">
             <FaBars className="w-6 h-6" />
@@ -31,12 +30,12 @@ const Navbar = ({ isAuthorized }) => {
 
         {/* Right Side */}
         <div className="flex items-center gap-4">
-          {/* Night Mode Toggle */}
+         
           <button onClick={toggleNightMode} className="focus:outline-none">
             {isNightMode ? (
-              <FaSun className="w-6 h-6 text-yellow-400" /> // Sun icon for light mode
+              <FaSun className="w-6 h-6 text-yellow-400" /> 
             ) : (
-              <FaMoon className="w-6 h-6 text-gray-300" /> // Moon icon for dark mode
+              <FaMoon className="w-6 h-6 text-gray-300" /> 
             )}
           </button>
 

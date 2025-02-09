@@ -50,7 +50,7 @@ export const authOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      // Add user details (including avatar) to the token
+      
       if (user) {
         token.id = user.id;
         token.name = user.name;
@@ -60,7 +60,7 @@ export const authOptions = {
       return token;
     },
     async session({ session, token }) {
-      // Add user details (including avatar) to the session
+      
       session.user = {
         id: token.id,
         name: token.name,

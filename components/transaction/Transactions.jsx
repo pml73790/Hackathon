@@ -11,8 +11,8 @@ const Transaction = ({ id, amount, description, date, onEdit, onDelete }) => {
             alert("Amount, description, and date cannot be empty.");
             return;
         }
-        onEdit(id, newAmount, newDescription, newDate); // Call the onEdit function with updated values
-        setIsEditing(false); // Exit editing mode
+        onEdit(id, newAmount, newDescription, newDate); 
+        setIsEditing(false); 
     };
 
     return (
