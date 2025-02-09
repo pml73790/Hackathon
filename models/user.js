@@ -1,21 +1,5 @@
 import mongoose, { Schema, models } from "mongoose";
 
-// flashcard schema 
-const transactionsSchema = new Schema({
-  description: {
-    type: String,
-    required: true,
-  },
-  amount: {
-    type: Number,
-    required: true, 
-  },
-  date: {
-    type: Date,
-    default: Date.now
-  }
-});
-
 const userSchema = new Schema(
   {
     name: {
@@ -25,14 +9,11 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: true,
+      unique: true, // Ensure uniqueness of email
     },
     password: {
       type: String,
       required: true,
-    },
-    transactions: {
-      type: [transactionsSchema], // array of flashcard objects
-      default: [], // default has no cards
     },
   },
   { timestamps: true }

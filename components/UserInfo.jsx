@@ -3,32 +3,32 @@
 import { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
-import { FaPlus, FaTimes } from "react-icons/fa";
+import { FaTimes, FaPlus } from "react-icons/fa";
 import Navbar from "./Navbar";
-import Transactions from "./transaction/TransactionList";
 import Chatbot from "./chat/simplechatbot";
 
 export default function UserInfo() {
   const { data: session } = useSession();
-
-  // State for transactions and balance
   const [userBalance, setUserBalance] = useState(0);
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [showChatbot, setShowChatbot] = useState(false); // Chatbot Toggle State
+  const [showChatbot, setShowChatbot] = useState(false);
+  const [showAddTransactionModal, setShowAddTransactionModal] = useState(false);
 
   useEffect(() => {
-    if (session?.user?.id) {
+    if (session?.user?.email) {
       fetchTransactions();
     }
   }, [session]);
 
   const fetchTransactions = async () => {
     try {
-      const res = await fetch(`/api/transactions/get?userId=${session?.user?.id}`);
+      const res = await fetch(`/api/getTransactions`);
+      if (!res.ok) throw new Error("Failed to fetch transactions");
+
       const data = await res.json();
-      setTransactions(data.transactions || []);
-      calculateBalance(data.transactions || []);
+      setTransactions(data || []);
+      calculateBalance(data || []);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching transactions:", error);
@@ -39,6 +39,34 @@ export default function UserInfo() {
   const calculateBalance = (transactions) => {
     const balance = transactions.reduce((acc, transaction) => acc + transaction.amount, 0);
     setUserBalance(balance);
+  };
+
+  const handleAddTransaction = () => {
+    setShowAddTransactionModal(true);
+  };
+
+  const handleSaveTransaction = async (newTransaction) => {
+    try {
+      const res = await fetch("/api/addTransaction", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userEmail: session?.user?.email, 
+          ...newTransaction,
+        }),
+      });
+
+      if (res.ok) {
+        fetchTransactions();
+        setShowAddTransactionModal(false);
+      } else {
+        console.error("Failed to save transaction");
+      }
+    } catch (error) {
+      console.error("Error saving transaction:", error);
+    }
   };
 
   return (
@@ -77,7 +105,15 @@ export default function UserInfo() {
 
           {/* Recent Transactions */}
           <section className="mt-8">
-            <h2 className="text-xl font-semibold text-gray-800">Recent Transactions</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-semibold text-gray-800">Recent Transactions</h2>
+              <button
+                onClick={handleAddTransaction}
+                className="bg-green-500 text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-green-600"
+              >
+                <FaPlus /> Add Transaction
+              </button>
+            </div>
             <div className="mt-4 bg-gray-50 border rounded-lg divide-y">
               {isLoading ? (
                 <p className="text-center p-4">Loading transactions...</p>
@@ -88,7 +124,9 @@ export default function UserInfo() {
                   <div key={transaction._id} className="flex justify-between items-center p-4">
                     <div>
                       <p className="font-medium text-gray-700">{transaction.description}</p>
-                      <p className="text-sm text-gray-500">{transaction.date.split("T")[0]}</p>
+                      <p className="text-sm text-gray-500">
+                        {new Date(transaction.date).toLocaleDateString()}
+                      </p>
                     </div>
                     <p className={`font-bold ${transaction.amount < 0 ? "text-red-500" : "text-green-500"}`}>
                       {transaction.amount < 0 ? "-" : "+"}${Math.abs(transaction.amount).toFixed(2)}
@@ -104,16 +142,14 @@ export default function UserInfo() {
       {/* Chatbot Toggle Button */}
       <button
         onClick={() => setShowChatbot(!showChatbot)}
-        className="fixed bottom-5 right-5 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition"
+        className="fixed bottom-5 right-5 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition"
       >
         💬
       </button>
 
-      {/* Chatbot Component (Visible when toggled) */}
+      {/* Chatbot Component */}
       {showChatbot && (
-        <div
-          className="fixed bottom-5 right-5 w-[350px] h-[550px] bg-white shadow-xl rounded-lg overflow-auto z-50"
-        >
+        <div className="fixed bottom-20 right-5 w-[350px] h-[550px] bg-white shadow-xl rounded-lg overflow-auto z-50">
           <button
             onClick={() => setShowChatbot(false)}
             className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600"
@@ -121,6 +157,47 @@ export default function UserInfo() {
             <FaTimes />
           </button>
           <Chatbot />
+        </div>
+      )}
+
+      {/* Add Transaction Modal */}
+      {showAddTransactionModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg w-[400px]">
+            <h2 className="text-xl font-semibold mb-4">Add New Transaction</h2>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const description = formData.get("description");
+                const amount = parseFloat(formData.get("amount"));
+
+                if (!description || isNaN(amount)) {
+                  alert("Please enter valid details!");
+                  return;
+                }
+
+                handleSaveTransaction({
+                  description,
+                  amount,
+                  date: new Date().toISOString(),
+                });
+              }}
+            >
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">Description</label>
+                <input type="text" name="description" className="mt-1 block w-full p-2 border rounded-md" required />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">Amount</label>
+                <input type="number" name="amount" step="0.01" className="mt-1 block w-full p-2 border rounded-md" required />
+              </div>
+              <div className="flex justify-end gap-2">
+                <button type="button" onClick={() => setShowAddTransactionModal(false)} className="bg-gray-500 text-white px-4 py-2 rounded-md">Cancel</button>
+                <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded-md">Save</button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </div>

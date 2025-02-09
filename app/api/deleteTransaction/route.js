@@ -2,50 +2,56 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { connectMongoDB } from "@/lib/mongodb";
 import Transaction from "@/models/transaction";
+import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
-export async function DELETE(request) {
+export async function PUT(request) {
     try {
         const session = await getServerSession(authOptions);
-        if (!session || !session.user || !session.user.email) {
+        if (!session?.user?.email) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
         const email = session.user.email;
+        const { id, amount, description, date } = await request.json();
 
-        const { searchParams } = new URL(request.url);
-        const id = searchParams.get("id"); 
-
-        if (!id) {
+        if (!id || !amount || !description || !date) {
             return NextResponse.json(
-                { error: "Transaction ID is required as a query parameter." },
+                { error: "Transaction ID, amount, description, and date are required." },
+                { status: 400 }
+            );
+        }
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return NextResponse.json(
+                { error: "Invalid transaction ID format." },
                 { status: 400 }
             );
         }
 
         await connectMongoDB();
 
-        // Ensure the transaction belongs to the authenticated user before deleting
-        const deletedTransaction = await Transaction.findOneAndDelete({
-            _id: id,
-            userEmail: email, // Ensure the transaction belongs to the user
-        });
+        const updatedTransaction = await Transaction.findOneAndUpdate(
+            { _id: id, userEmail: email }, 
+            { $set: { amount, description, date } }, 
+            { new: true }
+        );
 
-        if (!deletedTransaction) {
+        if (!updatedTransaction) {
             return NextResponse.json(
-                { error: "Transaction not found or you do not have permission to delete it." },
+                { error: "Transaction not found or unauthorized." },
                 { status: 404 }
             );
         }
 
         return NextResponse.json(
-            { message: "Transaction deleted successfully" },
+            { message: "Transaction updated successfully", transaction: updatedTransaction },
             { status: 200 }
         );
     } catch (error) {
-        console.error("Error deleting transaction:", error);
+        console.error("Error updating transaction:", error);
         return NextResponse.json(
-            { error: "Internal server error" },
+            { error: "Internal server error." },
             { status: 500 }
         );
     }

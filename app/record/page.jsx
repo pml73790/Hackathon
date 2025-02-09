@@ -1,57 +1,99 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { connectMongoDB } from "@/lib/mongodb";
-import Transaction from "@/models/Transaction";
 import User from "@/models/user";
 import { NextResponse } from "next/server";
 
-// Handle POST request to add financial data
+// Handle POST request to add financial transaction
 export async function POST(req) {
     try {
         // Authenticate user session
         const session = await getServerSession(authOptions);
-        if (!session || !session.user || !session.user.email) {
+        if (!session?.user?.email) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        // Get user email from session
-        const email = session.user.email;
+        const email = session.user.email; // Get user email
+        await connectMongoDB(); // Connect to MongoDB
 
-        // Connect to MongoDB
-        await connectMongoDB();
-
-        // Find user by email
+        // Find the user
         const user = await User.findOne({ email });
         if (!user) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
 
-        // Parse incoming data
+        // Parse incoming transaction data
         const body = await req.json();
-        const { income, expenses, savings, investments, budget } = body;
+        const { description, amount, date } = body;
 
-        // Create new finance record
-        const newFinance = new Finance({
-            user: user._id, // Link finance record to user
-            income,
-            expenses,
-            savings,
-            investments,
-            budget,
-        });
+        if (!description || !amount) {
+            return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+        }
 
-        // Save to database
-        await newFinance.save();
+        // Create a new transaction object
+        const newTransaction = {
+            description,
+            amount,
+            date: date || new Date(),
+        };
+
+        // Add transaction to user's document
+        user.transactions.push(newTransaction);
+        await user.save(); // Save updated user document
 
         return NextResponse.json(
-            { message: "Finance record created successfully", data: newFinance },
+            { message: "Transaction added successfully", transaction: newTransaction },
             { status: 201 }
         );
     } catch (error) {
-        console.error("Error creating finance record:", error);
+        console.error("Error adding transaction:", error);
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    }
+}
+
+
+export async function GET() {
+    try {
+        const session = await getServerSession(authOptions);
+        if (!session?.user?.email) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
+        const email = session.user.email;
+        await connectMongoDB();
+
+        // Find the user and return transactions
+        const user = await User.findOne({ email });
+        if (!user) {
+            return NextResponse.json({ error: "User not found" }, { status: 404 });
+        }
+
+        const transactions = user.transactions || [];
+
+        // Generate summary dynamically
+        const totalIncome = transactions
+            .filter((t) => t.amount > 0)
+            .reduce((sum, t) => sum + t.amount, 0);
+
+        const totalExpenses = transactions
+            .filter((t) => t.amount < 0)
+            .reduce((sum, t) => sum + Math.abs(t.amount), 0);
+
+        const balance = totalIncome - totalExpenses;
+
         return NextResponse.json(
-            { error: "Internal server error" },
-            { status: 500 }
+            {
+                transactions,
+                summary: {
+                    totalIncome,
+                    totalExpenses,
+                    balance,
+                },
+            },
+            { status: 200 }
         );
+    } catch (error) {
+        console.error("Error fetching transactions:", error);
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 }
