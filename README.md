@@ -1,34 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Team members: Vi Tran, Tri Vo, Torsa Rahman, My Ly
+Purpose of the project: The purpose of our project is to make a user-friendly web service for
+users to be able to track their money goals and be able to budget efficiently. We are also using
+chatbots to help users be able to ask questions and get advice regarding their finances.
+Tools utilized: VS code, github, Mongodb, deepseek, google, geeksforgeeks, stackflow,
+w3school
+Problems we ran into and how we overcame them: We ran into many problems and challenges
+while doing this project. The first was uploading to the git hub. For the person who wanted to
+make the first commit, for some reason, we couldn't push directly from vs code to Git Hub. They
+shared it to Google Drive and when everyone opened and ran it, there were errors and
+dependency issues because not all the files uploaded and some of the folders didn't either.
+Another problem is figuring out how to implement a database into our website. We fix this by
+getting help from AI and then look some stuff on the internet to learn more about the databases.
+Cred to any public frameworks: None
+How to run our project: The project under branch vi-hack is our final project. To run it upload the
+folder onto vs code. Type “npm install” into the terminal. Then type “npm run dev”. This will give
+a local host link that you can push to get to out project
+Youtube link: https://youtu.be/rlFANbcPLg0?si=w0c-QvbFGzC7G_xw
