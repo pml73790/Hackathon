@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('money.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        #chat-container {
+            width: 1000px;
+            max-width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #chatbox {
+            width: 90%;
+            height: 600px;
+            padding: 10px;
+            overflow-y: scroll;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        #userInput {
+            width: 90%;
+            padding: 30px;
+            border: none;
+            border-top: 1px solid #ccc;
+            box-sizing: border-box;
+            margin-bottom: 60px;
+        }
+        #banking-image {
+            width: 90%;
+            height: auto;
+            margin-bottom: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chatbox"></div>
+        <input type="text" id="userInput" placeholder="Type a message..." onkeydown="if(event.key === 'Enter') sendMessage()">
+    </div>
+    <script src="simplechatbot.js"></script>
+</body>
+</html>
+<!-- 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
+ -->
