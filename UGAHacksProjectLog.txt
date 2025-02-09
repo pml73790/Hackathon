@@ -1,122 +1,107 @@
-UGAHacks Project Log Template
+UGAHacks Project Documentation
 Project Information
-Project Title: Hackathon Project
-Team Members: Torsa Rahman, Tri Vo, Vi Tran, My Ly
+Project Title: MoneyMentor
+Team Members: Vi Tran, Tri Vo, Torsa Rahman, My Ly
 Tier Level: Intermediate
-Project Description: 
-
-
-Friday 
-Welcome to UGAHacks __ ! We’re excited that you’re participating and revving up for an amazing weekend! Today will be short, but we advise you to settle on a project and create a plan to guide you! Already have something in mind? Now’s a great time to get started!
-
-
+Project Description: We are trying to create a financial tracking app with an integrated AI
+chatbot.
+Friday
 Goals:
-Goal 1: Design a user-friendly website for financial tracking and budgeting
-Goal 2: 
-Goal 3: 
-
+Figure out which challenge we wanted to do and what level of project we want to
+attempt. Pick a project website and what languages we want to use for it.
+Familiarize ourselves with chatbot because we want to do it in our project and we have
+never used it.
+Start on the frontend and try to implement login and signup with authentication
+Start setting up the server and database and connect it to the frontend
 Progress:
-We have done decided what challenge to work on it + we’ve come to agreement for a topic and a project to work on + we also decided the language/database/server to implement + designed the user-friendly interface for everyone 
-
-
+We decided on the idea of doing the second Truist challenge. We decided to use react. Not all
+the group members are experienced with it so it was a little bit hard. Torsa and My also started
+on the frontend and were actually able to get more of the frontend done than we thought. Tri
+make a chatbox for the website and Vi works on the backend. We got some of the skeleton
+done with most of the pages we decided to tackle. We have a homepage that has general
+account info like the balance and stuff and a chatbot and goals page. It's all empty but we have
+it set up. Our group member My tried to figure out Figma and a good design template we can
+use. Tri also set up github for the project.
 Challenges:
-1. Challenge 1: We spend too much time getting food and waste too much time.
-   - Solution (if found): We decide to get in line earlier next time. 
-2. Challenge 2: We don't have much experience with creating a chatbot.
-   - Solution (if found): We look up how to create a chatbot online and use AI to create a simple chatbot. 
-
-
+1. Challenge 1: Sharing the project to Git Hub was a challenge from Vi’s computer. She set up
+most of the basic files and stuff and connected it to the backend. For some reason when we
+were trying to upload to github from vs code it was not working. She then shared through google
+drive and when other members tried to open and run the project, it didn’t work because it wasnt
+uploading the files in the folders and directories she had set up and random files were missing.
+This caused a big delay in everyone being able to work on it.
+- Solution (if found): No solution on Friday
+2. Challenge 2: Trying to set up the backend and authentication with on JSX files was very
+difficult for me (Torsa) and Tri because I have only ever done it with javascript (also have never
+used react or JSX)and he mostly has experience in java and no web programming experience
+so it was very challenging. The little bit we attempted on Friday was very confusing.
+- Solution (if found): No solution on Friday
+3. Challenge 3: Tri was able to figure out what chatbot was and watched YouTube videos and
+stuff on it but couldn't figure out how to implement it into our code
+- Solution (if found): No solution on Friday we were really tired.
 Learning:
-(List key concepts or skills learned)
-Creating a simple chatbot
-
-
-AI Usage (if any): chatGPT
-
-Tool used: mongoDB, VS code, Github, W3School
-Purpose:
-How it contributed to learning:
-The tools are our workspace and provided with information on how to do our project. 
-
-
-
-
-Saturday 
-Saturday is the longest day of the Hackathon! The bulk of your project will get done within today, so set your goals wisely!
-
-Goals:
-Goal 1
-Goal 2
-Goal 3
-
-Progress:
-(Describe was accomplished)
-
-
-
-Challenges:
-1. Challenge 1:
-   - Solution (if found):
-2. Challenge 2:
-   - Solution (if found):
-
-
-Learning:
-(List key concepts or skills learned)
-
-
-
+We learned a lot. I (Torsa) Learned a lot about react which is a language I haven't used before. I
+used YouTube and chat GPT to learn how it works and the basics of it. It is similar to JavaScript
+so that was good. Tri learned about Chatbot and how it works and how to train it which he had
+never done before. My tried to learn about Figma and how we can integrate it into our code. Vi
+did the frontend skeleton and most of the backend and learned how to connect the chatbot to
+the code we already have.
 AI Usage (if any):
-
-Tool used:
-Purpose:
-How it contributed to learning:
-
-
-
-
-
-
-
+We used AI for most general questions instead of Google like learning how to react to what a
+chatbot is and how it works. It was helpful because it could answer specific and personalized
+questions better.
+Tool used: Deepseek, VS Code, GitHub
+Purpose: Learning about react and chatbot and the working environment
+How it contributed to learning: I think it contributed to our learning significantly because of
+how helpful it was with information. VS Code increases productivity with writing code. We use
+Git as our version control tool.
+Saturday
+Goals:
+Implement the frontend with content. Friday we mostly had just blank pages so we really
+wanted to focus on having content on each page
+Implement chatbot and also implement authentication.
+Implement the backend of charts and graphs we have. Also, implement the backend of
+everything in general
+Progress:
+My and Torsa were able to implement the frontend with content and fill all the pages we had with
+some styles. We put in authentication. Tri got chatbot integrated, help Vi with some backend and
+gave the chatbox some style. Vi allows the website to get access to the MongoDB and
+authentication. Tri and Torsa wrote up the documentation for Friday and Saturday.
+Challenges:
+1. Challenge 1: We got chatbot integrated and then we accidentally did something and it no
+longer worked. This was frustrating and took a lot of time to try to debug and figure out where
+the problem was. We were having problems with the input box for the chatbot.
+- Solution (if found): Tri got it to work eventually
+2. Challenge 2: Implementing the backend was challenging and it just wasn’t working
+sometimes and it was very frustrating.
+- Solution (if found): We got some things implemented but a lot of it isn't implemented in the
+backend.
+3. Challenge 3: We gave up on trying to use Figma because it was asking for money
+- Solution (if found): No solution. It was just annoying.
+Learning:
+We learned how to integrate the backend. Tri learned a lot about chatbot which is something we
+never really used. My and Torsa learned how to develop frontend better. Vi now understands
+how to use MongoDB.
+AI Usage (if any): We used AI to get started with databases like MongoDB
+Tool used: Deepseek, MongoDB
+Purpose: Deepseek for learning about databases and MongoDB for storing user information
+How it contributed to learning: It helped with learning how to implement MongoDB into our
+code. MongoDB was used to store the login info of users.
 Sunday
-Submissions are due at 8AM today!! Fit in your final touches for the project and make sure to check the submission checklist below to ensure you’re ready for judging!
-
 Goals:
-Goal 1
-Goal 2
-Goal 3
-
+Implement as much of the backend as possible with the time we have left
+Make frontend prettier
+Finish documentation
 Progress:
-(Describe was accomplished)
-
-
-
+We finished up the documentation together and submitted our project. Not much was done here
+since everything was done before.
 Challenges:
-1. Challenge 1:
-   - Solution (if found):
-2. Challenge 2:
-   - Solution (if found):
-
-
+1. Challenge 1: Backend was still a problem. If we had a few more weeks we would be able to
+figure it out. We tried to do as much as we could.
+- Solution (if found): Implemented what we could.
 Learning:
-(List key concepts or skills learned)
-
-
-
+Learned how to write documentation and submit projects
 AI Usage (if any):
-
-Tool used:
-Purpose:
-How it contributed to learning:
-
-
-
-
-
-Submission Checklist
-Make sure to submit on the UGAHacks __ Devpost at 8AM on Sunday!
-
-Project Github Repo 
-Readme file (summary of project log)
-Completed Project Log as PDF
-Live Project Site (optional)
+Didnt really use ai on Sunday.
+Tool used: Google Docs
+Purpose: Writing the documentation
+How it contributed to learning: Easier to edit the documentation
