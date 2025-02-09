@@ -18,18 +18,25 @@ export const authOptions = {
           const user = await User.findOne({ email });
 
           if (!user) {
-            return null;
+            return null; // User not found
           }
 
           const passwordsMatch = await bcrypt.compare(password, user.password);
 
           if (!passwordsMatch) {
-            return null;
+            return null; // Incorrect password
           }
 
-          return user;
+          // Return user object with avatar
+          return {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            avatar: user.avatar, // Include the avatar field
+          };
         } catch (error) {
           console.log("Error: ", error);
+          return null;
         }
       },
     }),
@@ -40,6 +47,27 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      // Add user details (including avatar) to the token
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+        token.avatar = user.avatar;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      // Add user details (including avatar) to the session
+      session.user = {
+        id: token.id,
+        name: token.name,
+        email: token.email,
+      };
+      return session;
+    },
   },
 };
 

@@ -5,7 +5,7 @@ import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import Navbar from "./Navbar";
-import Transactions from "./Transactions";
+import Transactions from "./transaction/TransactionList";
 import Chatbot from "./chat/simplechatbot";
 
 export default function UserInfo() {
